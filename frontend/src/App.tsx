@@ -1,33 +1,83 @@
-import React, { Children } from "react";
-
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
-import MemoryPage from "./pages/MemoryPage";
-import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import PrivateRoute from "./components/PrivateRoute";
+import AppLayout from "./components/layout/AppLayout";
+
+// Import pages
+import Dashboard from "./pages/Dashboard.tsx";
+import ReceiptDetail from "./pages/ReceiptDetail.tsx";
+import UploadReceipt from "./pages/UploadReceipt.tsx";
+import Reports from "./pages/Reports.tsx";
+import ReceiptsList from "./pages/ReceiptsList.tsx";
+import Settings from "./pages/Settings.tsx";
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="*" element={<NotFound />} />
-
         <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<LoginPage />} />
+
+        {/* Protected routes with AppLayout */}
         <Route
-          path="/home"
+          path="/dashboard"
           element={
             <PrivateRoute>
-              <Home />
+              <AppLayout>
+                <Dashboard />
+              </AppLayout>
             </PrivateRoute>
           }
         />
-        <Route path="/login" element={<LoginPage />} />
         <Route
-          path="/memory/:id"
+          path="/receipt/:id"
           element={
             <PrivateRoute>
-              <MemoryPage />
+              <AppLayout>
+                <ReceiptDetail />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/receipts"
+          element={
+            <PrivateRoute>
+              <AppLayout>
+                <ReceiptsList />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/upload"
+          element={
+            <PrivateRoute>
+              <AppLayout>
+                <UploadReceipt />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/reports"
+          element={
+            <PrivateRoute>
+              <AppLayout>
+                <Reports />
+              </AppLayout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <PrivateRoute>
+              <AppLayout>
+                <Settings />
+              </AppLayout>
             </PrivateRoute>
           }
         />

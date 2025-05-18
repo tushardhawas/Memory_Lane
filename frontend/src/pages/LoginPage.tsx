@@ -24,7 +24,7 @@ const LoginPage = () => {
   console.log(data);
   // Mock login logic - in real app, validate user
   localStorage.setItem("isLoggedIn", "true");
-  navigate("/home");
+  navigate("/dashboard");
 };
 
 
